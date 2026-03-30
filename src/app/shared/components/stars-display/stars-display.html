@@ -1,0 +1,7 @@
+<div class="stars">
+  @for (filled of starsArray; track $index) {
+    <span class="star" [class.filled]="filled" [class.empty]="!filled">
+      {{ filled ? '⭐' : '☆' }}
+    </span>
+  }
+</div>

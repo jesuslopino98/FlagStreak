@@ -1,0 +1,16 @@
+@if (hints.length > 0) {
+  <div class="hint-panel">
+    <h3 class="hint-title">{{ lang.t('hintsTitle') }}</h3>
+    <div class="hint-list">
+      @for (hint of hints; track hint.type; let i = $index) {
+        <div class="hint-card" [style.animation-delay]="(i * 0.1) + 's'">
+          <span class="hint-icon">{{ iconFor(hint.type) }}</span>
+          <div class="hint-content">
+            <span class="hint-label">{{ labelFor(hint.type) }}</span>
+            <span class="hint-value">{{ valueFor(hint) }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}

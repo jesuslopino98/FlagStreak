@@ -1,0 +1,107 @@
+<div class="app-shell">
+  <header class="navbar">
+    <div class="navbar-inner">
+
+      <!-- Left: hamburger -->
+      <div class="navbar-left">
+        <div class="nav-menu" (click)="$event.stopPropagation()">
+          <button class="hamburger" (click)="toggleMenu($event)" [class.open]="menuOpen()" [attr.aria-label]="lang.t('navMenu')">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          @if (menuOpen()) {
+            <div class="nav-dropdown">
+              <a routerLink="/daily" routerLinkActive="active" (click)="menuOpen.set(false)">
+                <span class="nav-dropdown__icon">🗓️</span> {{ lang.t('navDaily') }}
+              </a>
+              <a routerLink="/survival" routerLinkActive="active" (click)="menuOpen.set(false)">
+                <span class="nav-dropdown__icon">⚔️</span> {{ lang.t('navSurvival') }}
+              </a>
+              <a routerLink="/training" routerLinkActive="active" (click)="menuOpen.set(false)">
+                <span class="nav-dropdown__icon">🎯</span> {{ lang.t('navTraining') }}
+              </a>
+              <a href="https://capitalstreak.app" target="_blank" rel="noopener" class="nav-dropdown__sibling" (click)="menuOpen.set(false)">
+                <span class="nav-dropdown__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16">
+                    <defs>
+                      <linearGradient id="cs" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%"   stop-color="#7c3aed"/>
+                        <stop offset="50%"  stop-color="#a855f7"/>
+                        <stop offset="100%" stop-color="#e879f9"/>
+                      </linearGradient>
+                    </defs>
+                    <rect x="56"  y="420" width="400" height="36" rx="6" fill="url(#cs)"/>
+                    <rect x="76"  y="388" width="360" height="36" rx="6" fill="url(#cs)"/>
+                    <rect x="100" y="196" width="36" height="196" rx="8" fill="url(#cs)"/>
+                    <rect x="172" y="196" width="36" height="196" rx="8" fill="url(#cs)"/>
+                    <rect x="244" y="196" width="36" height="196" rx="8" fill="url(#cs)"/>
+                    <rect x="316" y="196" width="36" height="196" rx="8" fill="url(#cs)"/>
+                    <rect x="376" y="196" width="36" height="196" rx="8" fill="url(#cs)"/>
+                    <rect x="80"  y="164" width="352" height="36" rx="4" fill="url(#cs)"/>
+                    <polygon points="56,164 256,60 456,164" fill="url(#cs)"/>
+                  </svg>
+                </span>
+                <span class="nav-dropdown__sibling-name">{{ lang.t('navCapitalStreak') }}</span>
+              </a>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Center: brand name -->
+      <a class="brand" routerLink="/daily">
+        <span class="brand-name">Flagstreak</span>
+      </a>
+
+      <!-- Right: settings gear -->
+      <div class="navbar-right">
+        <div class="settings-menu" (click)="$event.stopPropagation()">
+          <button class="gear-btn" (click)="toggleSettings($event)" [class.open]="settingsOpen()" [attr.aria-label]="lang.t('settings')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </button>
+
+          @if (settingsOpen()) {
+            <div class="settings-dropdown">
+
+              <!-- Tema -->
+              <div class="setting-row" (click)="toggleTheme()">
+                <span class="setting-row__label">
+                  {{ lang.t('labelTheme') }}
+                </span>
+                <div class="seg-control">
+                  <span class="seg-option" [class.active]="theme() === 'light'">☀️</span>
+                  <span class="seg-option" [class.active]="theme() === 'dark'">🌙</span>
+                  <div class="seg-pill" [class.right]="theme() === 'dark'"></div>
+                </div>
+              </div>
+
+              <div class="setting-divider"></div>
+
+              <!-- Idioma -->
+              <div class="setting-row" (click)="toggleLanguage($event)">
+                <span class="setting-row__label">
+                  {{ lang.t('labelLang') }}
+                </span>
+                <div class="seg-control">
+                  <span class="seg-option" [class.active]="lang.lang() === 'es'">ES</span>
+                  <span class="seg-option" [class.active]="lang.lang() === 'en'">EN</span>
+                  <div class="seg-pill" [class.right]="lang.lang() === 'en'"></div>
+                </div>
+              </div>
+
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main-content">
+    <router-outlet />
+  </main>
+</div>

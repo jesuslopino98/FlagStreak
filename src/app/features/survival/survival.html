@@ -1,0 +1,133 @@
+<div class="survival-page">
+
+  @if (loading()) {
+    <div class="loading-screen">
+      <div class="loader"></div>
+      <p>{{ lang.t('loadingShort') }}</p>
+    </div>
+  }
+
+  @if (!loading()) {
+
+    <!-- LOBBY -->
+    @if (phase() === 'lobby') {
+      <div class="lobby-container">
+        <h2 class="section-title">{{ lang.t('leaderboard') }}</h2>
+
+        @if (leaderboard().length === 0) {
+          <div class="empty-board">{{ lang.t('noRuns') }}</div>
+        } @else {
+          <div class="leaderboard-list">
+            <div class="lb-header">
+              <span>#</span>
+              <span>{{ lang.t('streakLabel') }}</span>
+              <span>{{ lang.t('timeLabel') }}</span>
+              <span>{{ lang.t('dateLabel') }}</span>
+            </div>
+            @for (run of leaderboard(); track $index) {
+              <div class="lb-row" [class.lb-completed]="run.completed">
+                <span class="lb-rank">{{ $index + 1 }}</span>
+                <span class="lb-score">{{ run.score }}</span>
+                <span class="lb-time">{{ formatMs(run.timeMs) }}</span>
+                <span class="lb-date">{{ run.date }}</span>
+                @if (run.completed) {
+                  <span class="lb-badge">{{ lang.t('completedBadge') }}</span>
+                }
+              </div>
+            }
+          </div>
+        }
+
+        <button class="start-btn" (click)="startCountdown()">{{ lang.t('startBtn') }}</button>
+      </div>
+    }
+
+    <!-- COUNTDOWN -->
+    @if (phase() === 'countdown') {
+      <div class="countdown-screen">
+        <div class="countdown-ring">
+          @for (n of [countdown()]; track countdown()) {
+            <span class="countdown-number" [class.countdown-go]="n === 0">
+              {{ n === 0 ? 'GO!' : n }}
+            </span>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- PLAYING -->
+    @if (phase() === 'playing') {
+      <div class="game-container">
+        <div class="playing-header">
+          <div class="stat-badge">
+            <span class="stat-label">{{ lang.t('streakLabel') }}</span>
+            <span class="stat-value score-value">{{ score() }}</span>
+          </div>
+          <div class="stat-badge timer-badge">
+            <span class="stat-label">{{ lang.t('timeLabel') }}</span>
+            <span class="stat-value timer-value">{{ formattedTime() }}</span>
+          </div>
+        </div>
+
+        @if (current()) {
+          <app-flag-display [country]="current()!" />
+          <app-country-input
+            [countries]="countries()"
+            [shake]="shake()"
+            (guessed)="onGuess($event)"
+          />
+        }
+      </div>
+    }
+
+    <!-- GAME OVER -->
+    @if (phase() === 'dead') {
+      <div class="result-card result-dead">
+        <div class="result-icon">💀</div>
+        <h2>{{ lang.t('gameOver') }}</h2>
+        @if (lastCountry()) {
+          <app-flag-display [country]="lastCountry()!" />
+        }
+        <div class="result-stats">
+          <div class="result-stat">
+            <span class="result-stat-label">{{ lang.t('streakLabel') }}</span>
+            <span class="result-stat-value">{{ score() }}</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-stat-label">{{ lang.t('finalTime') }}</span>
+            <span class="result-stat-value">{{ formattedTime() }}</span>
+          </div>
+        </div>
+        <p class="result-answer">{{ lang.t('wasAnswer') }}: <strong>{{ lastAnswer() }}</strong></p>
+        <div class="result-actions">
+          <button class="play-again-btn" (click)="playAgain()">{{ lang.t('playAgain') }}</button>
+          <button class="back-btn" (click)="backToLobby()">{{ lang.t('backToLobby') }}</button>
+        </div>
+      </div>
+    }
+
+    <!-- COMPLETED -->
+    @if (phase() === 'completed') {
+      <div class="result-card result-completed">
+        <div class="result-icon">🏆</div>
+        <h2>{{ lang.t('survivalCompleted') }}</h2>
+        <p class="result-sub">{{ lang.t('allCountriesGuessed') }}</p>
+        <div class="result-stats">
+          <div class="result-stat">
+            <span class="result-stat-label">{{ lang.t('streakLabel') }}</span>
+            <span class="result-stat-value">{{ score() }}</span>
+          </div>
+          <div class="result-stat">
+            <span class="result-stat-label">{{ lang.t('finalTime') }}</span>
+            <span class="result-stat-value">{{ formattedTime() }}</span>
+          </div>
+        </div>
+        <div class="result-actions">
+          <button class="play-again-btn" (click)="playAgain()">{{ lang.t('playAgain') }}</button>
+          <button class="back-btn" (click)="backToLobby()">{{ lang.t('backToLobby') }}</button>
+        </div>
+      </div>
+    }
+
+  }
+</div>

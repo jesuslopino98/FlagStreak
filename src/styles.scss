@@ -1,0 +1,138 @@
+/* ─── Google Fonts ─── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap');
+
+/* ─── Dark theme (default) ─── */
+:root,
+[data-theme="dark"] {
+  --color-bg:           #0a0f1e;
+  --color-surface:      #111827;
+  --color-surface-2:    #1a2233;
+  --color-border:       #2d3748;
+  --color-hover:        #1e2a3a;
+  --color-text:         #f0f4f8;
+  --color-text-muted:   #8fa3bb;
+  --color-text-dim:     #4a6080;
+
+  --color-accent:       #3b82f6;
+  --color-accent-2:     #60a5fa;
+  --color-accent-3:     #38bdf8;
+  --color-accent-glow:  rgba(59, 130, 246, 0.35);
+  --color-accent-soft:  rgba(59, 130, 246, 0.12);
+
+  --color-success:      #10d9a0;
+  --color-success-glow: rgba(16, 217, 160, 0.25);
+  --color-error:        #f43f5e;
+  --color-error-glow:   rgba(244, 63, 94, 0.25);
+  --color-warning:      #fbbf24;
+  --color-gold:         #f59e0b;
+
+  --color-navbar-bg:    rgba(10, 15, 30, 0.88);
+  --color-navbar-border: rgba(59, 130, 246, 0.14);
+
+  --shadow-sm:  0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md:  0 8px 24px rgba(0, 0, 0, 0.55);
+  --shadow-lg:  0 16px 48px rgba(0, 0, 0, 0.65);
+  --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.18);
+
+  --grad-accent:  linear-gradient(135deg, #2563eb, #3b82f6, #38bdf8);
+  --grad-success: linear-gradient(135deg, #10d9a0, #06b6d4);
+  --grad-error:   linear-gradient(135deg, #f43f5e, #fb7185);
+  --grad-gold:    linear-gradient(135deg, #f59e0b, #fbbf24, #fde68a);
+
+  --body-glow-1: rgba(37, 99, 235, 0.10);
+  --body-glow-2: rgba(56, 189, 248, 0.06);
+  --body-glow-3: rgba(59, 130, 246, 0.03);
+}
+
+/* ─── Light theme ─── */
+[data-theme="light"] {
+  --color-bg:           #f0f4f8;
+  --color-surface:      #ffffff;
+  --color-surface-2:    #e8eef6;
+  --color-border:       #cdd8e8;
+  --color-hover:        #e4ecf5;
+  --color-text:         #0d1829;
+  --color-text-muted:   #4a6080;
+  --color-text-dim:     #8fa3bb;
+
+  --color-accent:       #2563eb;
+  --color-accent-2:     #3b82f6;
+  --color-accent-3:     #0284c7;
+  --color-accent-glow:  rgba(37, 99, 235, 0.22);
+  --color-accent-soft:  rgba(37, 99, 235, 0.08);
+
+  --color-success:      #059669;
+  --color-success-glow: rgba(5, 150, 105, 0.20);
+  --color-error:        #dc2626;
+  --color-error-glow:   rgba(220, 38, 38, 0.20);
+  --color-warning:      #d97706;
+  --color-gold:         #b45309;
+
+  --color-navbar-bg:    rgba(255, 255, 255, 0.92);
+  --color-navbar-border: rgba(37, 99, 235, 0.12);
+
+  --shadow-sm:  0 2px 8px rgba(13, 24, 41, 0.08);
+  --shadow-md:  0 8px 24px rgba(13, 24, 41, 0.12);
+  --shadow-lg:  0 16px 48px rgba(13, 24, 41, 0.16);
+  --shadow-glow: 0 0 40px rgba(37, 99, 235, 0.12);
+
+  --grad-accent:  linear-gradient(135deg, #1d4ed8, #2563eb, #0284c7);
+  --grad-success: linear-gradient(135deg, #059669, #0891b2);
+  --grad-error:   linear-gradient(135deg, #dc2626, #e11d48);
+  --grad-gold:    linear-gradient(135deg, #b45309, #d97706, #fbbf24);
+
+  --body-glow-1: rgba(37, 99, 235, 0.05);
+  --body-glow-2: rgba(2, 132, 199, 0.04);
+  --body-glow-3: rgba(59, 130, 246, 0.02);
+}
+
+/* ─── Shared tokens (no cambian con el tema) ─── */
+:root {
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-pill: 999px;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+  background-image:
+    radial-gradient(ellipse at 15% 10%,  var(--body-glow-1) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 85%,  var(--body-glow-2) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%,  var(--body-glow-3) 0%, transparent 70%);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+/* ─── Typography ─── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}

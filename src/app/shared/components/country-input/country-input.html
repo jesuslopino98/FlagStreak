@@ -1,0 +1,41 @@
+<div class="input-wrapper" [class.shake]="shake">
+  <div class="input-field">
+    <input
+      class="country-input"
+      type="text"
+      role="combobox"
+      aria-autocomplete="list"
+      [attr.aria-label]="lang.t('inputLabel')"
+      [attr.placeholder]="lang.t('inputPlaceholder')"
+      autocomplete="off"
+      [attr.aria-expanded]="isExpanded()"
+      [attr.aria-controls]="listboxId"
+      [attr.aria-activedescendant]="activeDescendantId()"
+      [ngModel]="inputValue()"
+      (ngModelChange)="onInput($event)"
+      (blur)="onBlur()"
+    />
+    <button class="submit-btn" (click)="submit()" [disabled]="!inputValue().trim()" [attr.aria-label]="lang.t('confirmLabel')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </button>
+  </div>
+
+  @if (showDropdown() && suggestions().length > 0) {
+    <ul class="suggestions" role="listbox" [id]="listboxId" [attr.aria-label]="lang.t('suggestionsLabel')">
+      @for (item of suggestions(); track item.country.cca2; let i = $index) {
+        <li
+          class="suggestion-item"
+          role="option"
+          [id]="'country-option-' + i"
+          [class.active]="i === activeIndex()"
+          [attr.aria-selected]="i === activeIndex()"
+          (mousedown)="select(item)"
+        >
+          <span>{{ item.label }}</span>
+        </li>
+      }
+    </ul>
+  }
+</div>

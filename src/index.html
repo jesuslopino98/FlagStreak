@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Flagstreak — Adivina la bandera del día</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ═══════════════════════════════════════════════
+       SEO BÁSICO
+  ════════════════════════════════════════════════ -->
+  <meta name="description" content="Juego web diario de adivinar banderas del mundo con pistas progresivas. ¿Cuántos intentos necesitas? Como Wordle, pero con banderas.">
+  <meta name="keywords" content="juego banderas, adivina la bandera, flagle, wordle banderas, juego diario, flags quiz, geography game">
+  <meta name="author" content="Flagstreak">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://flagstreak.com/">
+
+  <!-- Alternates para soporte bilingüe (misma URL sirve ES y EN) -->
+  <link rel="alternate" hreflang="es" href="https://flagstreak.com/">
+  <link rel="alternate" hreflang="en" href="https://flagstreak.com/">
+  <link rel="alternate" hreflang="x-default" href="https://flagstreak.com/">
+
+  <!-- ═══════════════════════════════════════════════
+       OPEN GRAPH — Previews en WhatsApp, Telegram,
+       Facebook, LinkedIn, Slack, Discord...
+  ════════════════════════════════════════════════ -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flagstreak.com/">
+  <meta property="og:site_name" content="Flagstreak">
+  <meta property="og:title" content="Flagstreak — Adivina la bandera del día">
+  <meta property="og:description" content="Cada día una bandera diferente. Usa las pistas para adivinarla en el menor número de intentos. ¿Puedes mantener tu racha?">
+  <meta property="og:image" content="https://flagstreak.com/og-image.png">
+  <meta property="og:image:secure_url" content="https://flagstreak.com/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Flagstreak — Juego diario de adivinar banderas del mundo">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <!-- ═══════════════════════════════════════════════
+       TWITTER / X CARD — summary_large_image muestra
+       la imagen grande al compartir en X
+  ════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flagstreak — Adivina la bandera del día">
+  <meta name="twitter:description" content="Cada día una bandera diferente. Usa las pistas para adivinarla en el menor número de intentos. ¿Puedes mantener tu racha?">
+  <meta name="twitter:image" content="https://flagstreak.com/og-image.png">
+  <meta name="twitter:image:alt" content="Flagstreak — Juego diario de adivinar banderas del mundo">
+
+  <!-- ═══════════════════════════════════════════════
+       PWA / MANIFEST & ICONOS
+  ════════════════════════════════════════════════ -->
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Flagstreak">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- ═══════════════════════════════════════════════
+       SEGURIDAD
+  ════════════════════════════════════════════════ -->
+  <meta name="referrer" content="no-referrer">
+  <!-- CSP: ajusta connect-src si añades más APIs externas -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: https://flagcdn.com https://restcountries.com;
+    connect-src 'self' https://restcountries.com;
+    manifest-src 'self';
+    object-src 'none';
+    base-uri 'self';
+  ">
+
+  <!-- ═══════════════════════════════════════════════
+       PERFORMANCE — preconnect a dominios externos
+       usados en el primer render
+  ════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://flagcdn.com" crossorigin>
+  <link rel="preconnect" href="https://restcountries.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" referrerpolicy="no-referrer">
+
+  <!-- ═══════════════════════════════════════════════
+       STRUCTURED DATA (JSON-LD)
+       Google usa esto para rich snippets y entender
+       el tipo de aplicación
+  ════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Flagstreak",
+    "alternateName": "Flagstreak — Adivina la bandera",
+    "description": "Juego web diario de adivinar banderas del mundo con pistas progresivas. Como Wordle, pero con banderas.",
+    "url": "https://flagstreak.com",
+    "applicationCategory": "GameApplication",
+    "genre": ["Puzzle", "Geography", "Trivia"],
+    "operatingSystem": "All",
+    "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
+    "inLanguage": ["es", "en"],
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "ratingCount": "1"
+    },
+    "screenshot": "https://flagstreak.com/og-image.png",
+    "featureList": [
+      "Bandera diferente cada día",
+      "Sistema de pistas progresivas",
+      "Racha y estadísticas",
+      "Modo supervivencia",
+      "Soporte bilingüe español e inglés",
+      "Modo oscuro y claro"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

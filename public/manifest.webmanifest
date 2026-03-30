@@ -1,0 +1,40 @@
+{
+  "name": "Flagstreak",
+  "short_name": "Flagstreak",
+  "description": "Juego web diario de adivinar banderas del mundo con pistas progresivas. Como Wordle, pero con banderas.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0f1e",
+  "theme_color": "#3b82f6",
+  "lang": "es",
+  "dir": "ltr",
+  "orientation": "portrait-primary",
+  "categories": ["games", "entertainment", "education"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/daily-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Modo diario — Adivina la bandera del día"
+    },
+    {
+      "src": "/screenshots/daily-desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Flagstreak en escritorio"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

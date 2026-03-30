@@ -1,0 +1,350 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ─── Navbar ─── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-navbar-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-navbar-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar-inner {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* ─── Navbar left group ─── */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 800;
+    background: var(--grad-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.04em;
+  }
+}
+
+
+/* ─── Navbar right group ─── */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* ─── Gear button ─── */
+.settings-menu {
+  position: relative;
+}
+
+.gear-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.4s ease;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    transition: color 0.2s;
+  }
+
+  &:hover {
+    background: var(--color-hover);
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    svg { transform: rotate(45deg); }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  &.open {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    svg { transform: rotate(90deg); }
+  }
+}
+
+/* ─── Settings dropdown ─── */
+.settings-dropdown {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  min-width: 210px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  animation: dropdownIn 0.18s ease;
+  padding: 0.3rem 0;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.85rem;
+  gap: 1.2rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+
+  &:hover {
+    background: var(--color-hover);
+  }
+}
+
+.setting-row__label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.setting-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 0.2rem 0;
+}
+
+/* ─── Pill / Segmented control ─── */
+.seg-control {
+  display: flex;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  position: relative;
+  flex-shrink: 0;
+  pointer-events: none; // click handled by parent row
+}
+
+.seg-option {
+  position: relative;
+  z-index: 1;
+  padding: 0.18rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+  min-width: 2rem;
+  text-align: center;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+
+  &.active {
+    color: var(--color-accent);
+  }
+}
+
+.seg-pill {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  background: var(--color-accent-soft);
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+  transition: left 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+
+  &.right {
+    left: 50%;
+  }
+}
+
+/* ─── Hamburger ─── */
+.nav-menu {
+  position: relative;
+}
+
+.hamburger {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+
+  span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--color-text-muted);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.2s;
+    transform-origin: center;
+  }
+
+  &:hover {
+    background: var(--color-hover);
+    border-color: var(--color-accent);
+    span { background: var(--color-text); }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  &.open {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+
+    span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  }
+}
+
+/* ─── Dropdown ─── */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 0;
+  min-width: 160px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  animation: dropdownIn 0.18s ease;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.15s, color 0.15s;
+    letter-spacing: -0.01em;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    &:hover {
+      background: var(--color-hover);
+      color: var(--color-text);
+    }
+
+    &.active {
+      color: var(--color-accent);
+      background: var(--color-accent-soft);
+    }
+  }
+
+  .nav-dropdown__icon {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .nav-dropdown__sibling {
+    border-top: 1px solid var(--color-border) !important;
+
+    .nav-dropdown__sibling-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #7c3aed, #a855f7, #e879f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    &:hover {
+      background: var(--color-hover);
+    }
+  }
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── Navbar responsive ─── */
+@media (max-width: 420px) {
+  .navbar-inner {
+    padding: 0 0.75rem;
+  }
+
+  .brand .brand-name {
+    font-size: 1.15rem;
+  }
+
+  .navbar-left,
+  .navbar-right {
+    gap: 0.4rem;
+  }
+
+  .hamburger,
+  .gear-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ─── Main ─── */
+.main-content {
+  flex: 1;
+}

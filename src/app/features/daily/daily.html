@@ -1,0 +1,111 @@
+<div class="daily-page">
+
+  @if (game.loading()) {
+    <div class="loading-screen" role="status" aria-live="polite">
+      <div class="loader" aria-hidden="true"></div>
+      <p>{{ lang.t('loading') }}</p>
+    </div>
+  }
+
+  @if (!game.loading() && game.loadError()) {
+    <div class="error-screen" role="alert">
+      <p>{{ lang.t('loadError') }}</p>
+      <button class="retry-btn" (click)="game.init()">{{ lang.t('retry') }}</button>
+    </div>
+  }
+
+  @if (!game.loading() && game.gameState()) {
+    @let state = game.gameState()!;
+    @let status = game.status();
+
+    <div class="game-container">
+
+      <!-- Streak row -->
+      <div class="streak-row" [attr.aria-label]="lang.t('streakLabel') + ': ' + game.stats().streak">
+        <span class="streak-row__icon" aria-hidden="true">🔥</span>
+        <span class="streak-row__value">{{ game.stats().streak }}</span>
+      </div>
+
+      <!-- Flag -->
+      <app-flag-display [country]="state.country" />
+
+      <!-- Hint circles -->
+      <div class="hint-circles" role="list" [attr.aria-label]="lang.t('hintsLabel')">
+        @for (circle of hintCircles(); track $index) {
+          <div
+            class="hint-circle"
+            role="listitem"
+            [class.revealed]="circle.revealed"
+            [class.idle]="!circle.revealed && status !== 'won'"
+            [class.won-idle]="!circle.revealed && status === 'won'"
+            [attr.tabindex]="circle.revealed || status === 'won' ? 0 : null"
+            [attr.aria-label]="circle.revealed ? circle.label + ': ' + circle.value : circle.label + ' (' + lang.t('unrevealedSuffix') + ')'"
+          >
+            <span class="circle-icon" aria-hidden="true">{{ circle.icon }}</span>
+
+            @if (circle.revealed) {
+              <div class="hint-tooltip" aria-hidden="true">
+                <span class="tooltip-label">{{ circle.label }}</span>
+                <span class="tooltip-value">{{ circle.value }}</span>
+              </div>
+              <div class="hint-inline" aria-hidden="true">
+                <span class="inline-value">{{ circle.value }}</span>
+              </div>
+            }
+
+            @if (!circle.revealed && status === 'won') {
+              <div class="hint-tooltip hint-tooltip--success" aria-hidden="true">
+                <span class="tooltip-label">{{ circle.label }}</span>
+                <span class="tooltip-value">{{ circle.value }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Input + toast slot -->
+      @if (status === 'playing') {
+        <app-country-input
+          [countries]="game.countries()"
+          [shake]="guessShake()"
+          (guessed)="onGuess($event)"
+        />
+        <div class="toast-slot">
+          @if (feedback().message) {
+            <div class="feedback-toast" role="status" aria-live="polite" [class]="'toast-' + feedback().type">
+              {{ feedback().message }}
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Result banner -->
+      @if (status !== 'playing') {
+        <div class="result-banner" role="region" [attr.aria-label]="lang.t('streakLabel')" [class.won]="status === 'won'" [class.lost]="status === 'lost'">
+          @if (status === 'won') {
+            <div class="result-icon" aria-hidden="true">🏆</div>
+            <div class="result-text">{{ lang.t('won') }}</div>
+            <div class="result-country">{{ countryName() }}</div>
+            <app-stars-display [stars]="game.stars()" [maxStars]="5" />
+          } @else {
+            <div class="result-icon" aria-hidden="true">💔</div>
+            <div class="result-text">{{ lang.t('gameOver') }}</div>
+            <div class="result-country">{{ lang.t('answerLabel') }}: <strong>{{ countryName() }}</strong></div>
+          }
+          <button class="share-btn" (click)="showShare.set(true)">
+            {{ lang.t('shareBtn') }}
+          </button>
+        </div>
+      }
+
+    </div>
+  }
+
+  @if (showShare()) {
+    <app-share-modal
+      [shareText]="game.shareText()"
+      (closed)="showShare.set(false)"
+    />
+  }
+
+</div>

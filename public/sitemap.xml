@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://flagstreak.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://flagstreak.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flagstreak.com/"/>
+  </url>
+
+  <url>
+    <loc>https://flagstreak.com/daily</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://flagstreak.com/daily"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flagstreak.com/daily"/>
+  </url>
+
+  <url>
+    <loc>https://flagstreak.com/survival</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://flagstreak.com/survival"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flagstreak.com/survival"/>
+  </url>
+
+</urlset>

@@ -1,0 +1,48 @@
+.flag-container {
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  border-radius: var(--radius-xl, 28px);
+  overflow: hidden;
+  background: var(--color-surface);
+
+  /* Layered glow + border effect */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.flag-skeleton {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background: linear-gradient(
+    105deg,
+    var(--color-surface) 0%,
+    rgba(124, 58, 237, 0.08) 40%,
+    var(--color-surface-2, #16162a) 50%,
+    rgba(124, 58, 237, 0.08) 60%,
+    var(--color-surface) 100%
+  );
+  background-size: 250% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+.flag-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+
+  &.visible { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -250% 0; }
+  100% { background-position:  250% 0; }
+}

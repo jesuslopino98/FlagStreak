@@ -1,0 +1,25 @@
+<div class="modal-backdrop" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2>{{ lang.t('yourResult') }}</h2>
+      <button class="close-btn" (click)="close()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="share-card">
+        <pre class="share-preview">{{ shareText }}</pre>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-copy" (click)="copy()">
+          {{ copied() ? lang.t('copied') : lang.t('copy') }}
+        </button>
+        <button class="btn btn-share" (click)="share()">
+          {{ lang.t('share') }}
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

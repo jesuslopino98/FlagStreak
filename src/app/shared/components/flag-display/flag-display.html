@@ -1,0 +1,22 @@
+<div class="flag-container">
+  @if (!loaded() && !error()) {
+    <div class="flag-skeleton"></div>
+  }
+  @if (!error()) {
+    <img
+      class="flag-image"
+      [class.visible]="loaded()"
+      [src]="country.flagSvg"
+      [alt]="country.flagAlt"
+      (load)="onLoad()"
+      (error)="onError()"
+    />
+  }
+  @if (error()) {
+    <img
+      class="flag-image visible"
+      [src]="country.flagPng"
+      [alt]="country.flagAlt"
+    />
+  }
+</div>

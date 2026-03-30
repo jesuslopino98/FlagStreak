@@ -1,0 +1,62 @@
+<div class="training-page">
+
+  @if (loading()) {
+    <div class="loading-screen">
+      <div class="loader"></div>
+      <p>{{ lang.t('loadingShort') }}</p>
+    </div>
+  }
+
+  @if (!loading()) {
+    <div class="game-container">
+
+      <!-- Header -->
+      <div class="game-header">
+        <div class="lives-row">
+          @for (full of attemptsArray(); track $index) {
+            <span class="heart" [class.empty]="!full">{{ full ? '❤️' : '🖤' }}</span>
+          }
+        </div>
+        <div class="stats-row">
+          <span class="stat-chip guessed-chip">✓ {{ guessed() }}</span>
+          <span class="stat-chip errors-chip">✗ {{ errors() }}</span>
+        </div>
+      </div>
+
+      <!-- Flag (directamente en el flex container, igual que daily/survival) -->
+      @if (current()) {
+        <app-flag-display [country]="current()!" />
+      }
+
+      <!-- Feedback banner (mismo ancho que la bandera, debajo) -->
+      @if (phase() === 'correct') {
+        <div class="feedback-banner feedback-correct">
+          <span class="feedback-icon">✓</span>
+          <span class="feedback-text">{{ lang.t('trainingCorrect') }}</span>
+        </div>
+      }
+
+      @if (phase() === 'wrong') {
+        <div class="feedback-banner feedback-wrong">
+          <div class="feedback-wrong-top">
+            <span class="feedback-icon">✗</span>
+            <span class="feedback-text">{{ lang.t('trainingWrong') }}</span>
+          </div>
+          <span class="feedback-answer">{{ lang.t('trainingAnswer') }}: <strong>{{ lastAnswer() }}</strong></span>
+          <button class="next-btn" (click)="nextAfterWrong()">{{ lang.t('trainingNext') }} →</button>
+        </div>
+      }
+
+      <!-- Input (only while playing) -->
+      @if (phase() === 'playing') {
+        <app-country-input
+          [countries]="countries()"
+          [shake]="shake()"
+          (guessed)="onGuess($event)"
+        />
+      }
+
+    </div>
+  }
+
+</div>
