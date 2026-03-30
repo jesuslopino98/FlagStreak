@@ -8,6 +8,8 @@
 
 A daily flag guessing game. Identify the country from its flag — the fewer attempts, the more stars you earn.
 
+**🌐 Live at [flagstreak.com](https://flagstreak.com)**
+
 ![Angular](https://img.shields.io/badge/Angular-21-dd0031?style=flat-square&logo=angular)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?style=flat-square&logo=typescript)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
@@ -83,6 +85,10 @@ src/
 └── public/                # Static assets
 ```
 
+### Related
+
+🏛️ [CapitalStreak](https://capitalstreak.app) — Same concept, but guess the capital city. ([repo](https://github.com/jesuslopino98/CapitalStreak))
+
 ### License
 
 MIT
@@ -92,6 +98,8 @@ MIT
 ## Español
 
 Un juego diario para adivinar banderas. Identifica el país a partir de su bandera — cuantos menos intentos, más estrellas consigues.
+
+**🌐 Juega en [flagstreak.com](https://flagstreak.com)**
 
 ### Modos de juego
 
@@ -163,6 +171,10 @@ src/
 │       └── components/    # FlagDisplay, CountryInput, HintPanel, StarsDisplay
 └── public/                # Assets estáticos
 ```
+
+### Relacionado
+
+🏛️ [CapitalStreak](https://capitalstreak.app) — El mismo concepto, pero adivina la capital. ([repo](https://github.com/jesuslopino98/CapitalStreak))
 
 ### Licencia
 
