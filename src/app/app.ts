@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, signal, effect } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { LanguageService } from './core/services/language.service';
 
@@ -14,16 +14,11 @@ export class App {
   menuOpen = signal(false);
   settingsOpen = signal(false);
 
-  constructor() {
-    effect(() => {
-      const t = this.theme();
-      document.documentElement.dataset['theme'] = t;
-      localStorage.setItem('flagstreak-theme', t);
-    });
-  }
-
   toggleTheme() {
-    this.theme.update(t => t === 'dark' ? 'light' : 'dark');
+    const newTheme = this.theme() === 'dark' ? 'light' : 'dark';
+    this.theme.set(newTheme);
+    document.documentElement.dataset['theme'] = newTheme;
+    localStorage.setItem('flagstreak-theme', newTheme);
   }
 
   toggleLanguage(event: Event) {
