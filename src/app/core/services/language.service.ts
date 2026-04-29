@@ -63,6 +63,7 @@ const TRANSLATIONS = {
     trainingGameOver: '¡Sin vidas!',
     trainingGameOverSub: 'Se acabaron las vidas',
     trainingStart: 'Comenzar',
+    trainingAll: 'Todas',
     // Share modal
     yourResult: 'Tu resultado',
     copy: 'Copiar',
@@ -140,6 +141,7 @@ const TRANSLATIONS = {
     trainingGameOver: 'No lives left!',
     trainingGameOverSub: 'You ran out of lives',
     trainingStart: 'Start',
+    trainingAll: 'All',
     // Share modal
     yourResult: 'Your result',
     copy: 'Copy',

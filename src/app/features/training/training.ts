@@ -9,6 +9,8 @@ type TrainingPhase = 'playing' | 'correct' | 'wrong';
 
 const MAX_ATTEMPTS = 2;
 
+const REGIONS = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'] as const;
+
 @Component({
   selector: 'app-training',
   standalone: true,
@@ -28,6 +30,9 @@ export class TrainingComponent implements OnInit, OnDestroy {
   current = signal<Country | null>(null);
   lastAnswer = signal('');
   shake = signal(false);
+  selectedRegion = signal<string | null>(null);
+
+  readonly REGIONS = REGIONS;
 
   private pool: Country[] = [];
   private poolIndex = 0;
@@ -39,6 +44,12 @@ export class TrainingComponent implements OnInit, OnDestroy {
 
   countries = signal<Country[]>([]);
 
+  filteredCountries = computed(() => {
+    const region = this.selectedRegion();
+    const all = this.countries();
+    return region ? all.filter(c => c.region === region) : all;
+  });
+
   ngOnInit(): void {
     this.countriesService.getAll().subscribe(c => {
       this.countries.set(c);
@@ -47,6 +58,17 @@ export class TrainingComponent implements OnInit, OnDestroy {
       this.loading.set(false);
       this.nextFlag();
     });
+  }
+
+  setRegion(region: string | null): void {
+    if (this.correctTimer) clearTimeout(this.correctTimer);
+    this.selectedRegion.set(region);
+    this.guessed.set(0);
+    this.errors.set(0);
+    const filtered = this.filteredCountries();
+    this.pool = this.shuffle([...filtered]);
+    this.poolIndex = 0;
+    this.nextFlag();
   }
 
   ngOnDestroy(): void {
@@ -63,7 +85,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
 
   private nextFlag(): void {
     if (this.poolIndex >= this.pool.length) {
-      this.pool = this.shuffle([...this.countries()]);
+      this.pool = this.shuffle([...this.filteredCountries()]);
       this.poolIndex = 0;
     }
     this.current.set(this.pool[this.poolIndex++]);

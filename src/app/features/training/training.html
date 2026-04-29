@@ -10,6 +10,18 @@
   @if (!loading()) {
     <div class="game-container">
 
+      <!-- Region filter -->
+      <div class="filter-row">
+        <button class="filter-chip" [class.active]="selectedRegion() === null" (click)="setRegion(null)">
+          {{ lang.t('trainingAll') }}
+        </button>
+        @for (region of REGIONS; track region) {
+          <button class="filter-chip" [class.active]="selectedRegion() === region" (click)="setRegion(region)">
+            {{ lang.translateRegion(region) }}
+          </button>
+        }
+      </div>
+
       <!-- Header -->
       <div class="game-header">
         <div class="lives-row">
@@ -50,7 +62,7 @@
       <!-- Input (only while playing) -->
       @if (phase() === 'playing') {
         <app-country-input
-          [countries]="countries()"
+          [countries]="filteredCountries()"
           [shake]="shake()"
           (guessed)="onGuess($event)"
         />
