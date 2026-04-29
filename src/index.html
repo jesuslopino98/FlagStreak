@@ -2,6 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
+  <script>
+    (function(){var s=localStorage.getItem('flagstreak-theme');document.documentElement.dataset.theme=(s==='dark'||s==='light')?s:window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';})();
+  </script>
   <title>Flagstreak — Adivina la bandera del día</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,7 +69,7 @@
   <!-- CSP: ajusta connect-src si añades más APIs externas -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://static.cloudflareinsights.com;
+    script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data: https://flagcdn.com https://restcountries.com;
